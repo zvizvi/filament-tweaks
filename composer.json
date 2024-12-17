@@ -33,6 +33,7 @@
     "autoload": {
         "psr-4": {
             "Dowhile\\FilamentTweaks\\": "src/",
+            "Dowhile\\FilamentTweaks\\Filters\\": "src/Filters/",
             "Dowhile\\FilamentTweaks\\Database\\Factories\\": "database/factories/"
         }
     },
