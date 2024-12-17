@@ -4,7 +4,6 @@ namespace Dowhile\FilamentTweaks;
 
 use Dowhile\FilamentTweaks\Commands\DowhileFilamentCommand;
 use Dowhile\FilamentTweaks\Testing\TestsDowhileFilament;
-
 use Filament\Actions\CreateAction;
 use Filament\Actions\MountableAction;
 use Filament\Forms\Components\Actions\Action;
@@ -93,8 +92,8 @@ class DowhileFilamentServiceProvider extends PackageServiceProvider
 
         // Disable CreateAndCreateAnother
         CreateRecord::disableCreateAnother();
-        CreateAction::configureUsing(fn(CreateAction $action) => $action->createAnother(false));
-        TablesCreateAction::configureUsing(fn(TablesCreateAction $action) => $action->createAnother(false));
+        CreateAction::configureUsing(fn (CreateAction $action) => $action->createAnother(false));
+        TablesCreateAction::configureUsing(fn (TablesCreateAction $action) => $action->createAnother(false));
 
         // Set translateLabel for all actions
         Action::configureUsing(function (Action $action): void {
