@@ -6,13 +6,11 @@ use Dowhile\FilamentTweaks\Commands\FilamentTweaksCommand;
 use Dowhile\FilamentTweaks\Testing\TestsFilamentTweaks;
 use Filament\Actions\CreateAction;
 use Filament\Actions\MountableAction;
-use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\Entry;
+use Filament\Pages\BasePage;
 use Filament\Resources\Pages\CreateRecord;
-use Filament\Resources\Pages\EditRecord;
-use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
@@ -20,7 +18,6 @@ use Filament\Support\Enums\Alignment;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Filament\Support\RawJs;
-use Filament\Tables\Actions\Action as TablesAction;
 use Filament\Tables\Actions\CreateAction as TablesCreateAction;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Filters\BaseFilter;
@@ -78,14 +75,7 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         // Centering form actions
-        CreateRecord::$formActionsAlignment = Alignment::Center;
-        EditRecord::$formActionsAlignment = Alignment::Center;
-        Action::configureUsing(function (Action $action): void {
-            $action->modalFooterActionsAlignment(Alignment::Center);
-        });
-        TablesAction::configureUsing(function (TablesAction $action) {
-            $action->modalFooterActionsAlignment(Alignment::Center);
-        });
+        BasePage::$formActionsAlignment = Alignment::Center;
         MountableAction::configureUsing(function (MountableAction $action) {
             $action->modalFooterActionsAlignment(Alignment::Center);
         });
@@ -96,10 +86,7 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
         TablesCreateAction::configureUsing(fn (TablesCreateAction $action) => $action->createAnother(false));
 
         // Set translateLabel for all actions
-        Action::configureUsing(function (Action $action): void {
-            $action->translateLabel();
-        });
-        TablesAction::configureUsing(function (TablesAction $action) {
+        MountableAction::configureUsing(function (MountableAction $action) {
             $action->translateLabel();
         });
         Column::configureUsing(function (Column $column): void {
