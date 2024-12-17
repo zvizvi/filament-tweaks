@@ -4,12 +4,28 @@ namespace Dowhile\FilamentTweaks;
 
 use Dowhile\FilamentTweaks\Commands\DowhileFilamentCommand;
 use Dowhile\FilamentTweaks\Testing\TestsDowhileFilament;
+
+use Filament\Actions\CreateAction;
+use Filament\Actions\MountableAction;
+use Filament\Forms\Components\Actions\Action;
+use Filament\Forms\Components\Field;
+use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\Entry;
+use Filament\Resources\Pages\CreateRecord;
+use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
+use Filament\Support\Enums\Alignment;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
+use Filament\Support\RawJs;
+use Filament\Tables\Actions\Action as TablesAction;
+use Filament\Tables\Actions\CreateAction as TablesCreateAction;
+use Filament\Tables\Columns\Column;
+use Filament\Tables\Filters\BaseFilter;
+use Filament\Tables\Table;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
@@ -62,6 +78,64 @@ class DowhileFilamentServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        // Centering form actions
+        CreateRecord::$formActionsAlignment = Alignment::Center;
+        EditRecord::$formActionsAlignment = Alignment::Center;
+        Action::configureUsing(function (Action $action): void {
+            $action->modalFooterActionsAlignment(Alignment::Center);
+        });
+        TablesAction::configureUsing(function (TablesAction $action) {
+            $action->modalFooterActionsAlignment(Alignment::Center);
+        });
+        MountableAction::configureUsing(function (MountableAction $action) {
+            $action->modalFooterActionsAlignment(Alignment::Center);
+        });
+
+        // Disable CreateAndCreateAnother
+        CreateRecord::disableCreateAnother();
+        CreateAction::configureUsing(fn(CreateAction $action) => $action->createAnother(false));
+        TablesCreateAction::configureUsing(fn(TablesCreateAction $action) => $action->createAnother(false));
+
+        // Set translateLabel for all actions
+        Action::configureUsing(function (Action $action): void {
+            $action->translateLabel();
+        });
+        TablesAction::configureUsing(function (TablesAction $action) {
+            $action->translateLabel();
+        });
+        Column::configureUsing(function (Column $column): void {
+            $column->translateLabel();
+        });
+        BaseFilter::configureUsing(function (BaseFilter $filter): void {
+            $filter->translateLabel();
+        });
+        Field::configureUsing(function (Field $field): void {
+            $field->translateLabel();
+        });
+        Entry::configureUsing(function (Entry $entry): void {
+            $entry->translateLabel();
+        });
+
+        // Table style
+        Table::configureUsing(function (Table $table): void {
+            $table
+                ->striped()
+                ->defaultPaginationPageOption(25);
+        });
+
+        // Macros
+        TextInput::macro('currencyMask', function (): TextInput {
+            /**
+             * @var TextInput $this
+             */
+            return $this->numeric()
+                ->mask(RawJs::make('$money($input)'))
+                ->stripCharacters(',')
+                ->extraInputAttributes([
+                    'maxlength' => '12',
+                ]);
+        });
+
         // Asset Registration
         FilamentAsset::register(
             $this->getAssets(),
