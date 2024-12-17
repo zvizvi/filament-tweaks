@@ -2,6 +2,8 @@
 
 namespace Dowhile\FilamentTweaks;
 
+use Dowhile\FilamentTweaks\Commands\DowhileFilamentCommand;
+use Dowhile\FilamentTweaks\Testing\TestsDowhileFilament;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
@@ -13,8 +15,6 @@ use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Dowhile\FilamentTweaks\Commands\DowhileFilamentCommand;
-use Dowhile\FilamentTweaks\Testing\TestsDowhileFilament;
 
 class DowhileFilamentServiceProvider extends PackageServiceProvider
 {
@@ -78,7 +78,7 @@ class DowhileFilamentServiceProvider extends PackageServiceProvider
 
         // Handle Stubs
         if (app()->runningInConsole()) {
-            foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
+            foreach (app(Filesystem::class)->files(__DIR__.'/../stubs/') as $file) {
                 $this->publishes([
                     $file->getRealPath() => base_path("stubs/filament-tweaks/{$file->getFilename()}"),
                 ], 'filament-tweaks-stubs');
@@ -101,8 +101,8 @@ class DowhileFilamentServiceProvider extends PackageServiceProvider
     {
         return [
             // AlpineComponent::make('filament-tweaks', __DIR__ . '/../resources/dist/components/filament-tweaks.js'),
-            Css::make('filament-tweaks-styles', __DIR__ . '/../resources/dist/filament-tweaks.css'),
-            Js::make('filament-tweaks-scripts', __DIR__ . '/../resources/dist/filament-tweaks.js'),
+            Css::make('filament-tweaks-styles', __DIR__.'/../resources/dist/filament-tweaks.css'),
+            Js::make('filament-tweaks-scripts', __DIR__.'/../resources/dist/filament-tweaks.js'),
         ];
     }
 
