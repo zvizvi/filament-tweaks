@@ -7,6 +7,7 @@ use Dowhile\FilamentTweaks\Testing\TestsFilamentTweaks;
 use Filament\Actions\CreateAction;
 use Filament\Actions\MountableAction;
 use Filament\Forms\Components\Field;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\Entry;
 use Filament\Pages\BasePage;
@@ -21,6 +22,7 @@ use Filament\Support\RawJs;
 use Filament\Tables\Actions\CreateAction as TablesCreateAction;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Filters\BaseFilter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
@@ -100,6 +102,14 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
         });
         Entry::configureUsing(function (Entry $entry): void {
             $entry->translateLabel();
+        });
+
+        // Not native select
+        Select::configureUsing(function (Select $select): void {
+            $select->native(false);
+        });
+        SelectFilter::configureUsing(function (SelectFilter $filter): void {
+            $filter->native(false);
         });
 
         // Table style
