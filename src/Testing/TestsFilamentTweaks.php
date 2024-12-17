@@ -7,7 +7,7 @@ use Livewire\Features\SupportTesting\Testable;
 /**
  * @mixin Testable
  */
-class TestsDowhileFilament
+class TestsFilamentTweaks
 {
     //
 }

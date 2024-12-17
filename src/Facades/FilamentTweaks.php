@@ -5,12 +5,12 @@ namespace Dowhile\FilamentTweaks\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Dowhile\FilamentTweaks\DowhileFilament
+ * @see \Dowhile\FilamentTweaks\FilamentTweaks
  */
-class DowhileFilament extends Facade
+class FilamentTweaks extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Dowhile\FilamentTweaks\DowhileFilament::class;
+        return \Dowhile\FilamentTweaks\FilamentTweaks::class;
     }
 }

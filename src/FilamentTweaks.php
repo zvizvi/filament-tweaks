@@ -2,4 +2,4 @@
 
 namespace Dowhile\FilamentTweaks;
 
-class DowhileFilament {}
+class FilamentTweaks {}

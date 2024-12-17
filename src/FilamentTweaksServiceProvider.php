@@ -2,8 +2,8 @@
 
 namespace Dowhile\FilamentTweaks;
 
-use Dowhile\FilamentTweaks\Commands\DowhileFilamentCommand;
-use Dowhile\FilamentTweaks\Testing\TestsDowhileFilament;
+use Dowhile\FilamentTweaks\Commands\FilamentTweaksCommand;
+use Dowhile\FilamentTweaks\Testing\TestsFilamentTweaks;
 use Filament\Actions\CreateAction;
 use Filament\Actions\MountableAction;
 use Filament\Forms\Components\Actions\Action;
@@ -31,7 +31,7 @@ use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class DowhileFilamentServiceProvider extends PackageServiceProvider
+class FilamentTweaksServiceProvider extends PackageServiceProvider
 {
     public static string $name = 'filament-tweaks';
 
@@ -159,7 +159,7 @@ class DowhileFilamentServiceProvider extends PackageServiceProvider
         }
 
         // Testing
-        Testable::mixin(new TestsDowhileFilament);
+        Testable::mixin(new TestsFilamentTweaks);
     }
 
     protected function getAssetPackageName(): ?string
@@ -185,7 +185,7 @@ class DowhileFilamentServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         return [
-            DowhileFilamentCommand::class,
+            FilamentTweaksCommand::class,
         ];
     }
 

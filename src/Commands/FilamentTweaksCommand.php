@@ -4,7 +4,7 @@ namespace Dowhile\FilamentTweaks\Commands;
 
 use Illuminate\Console\Command;
 
-class DowhileFilamentCommand extends Command
+class FilamentTweaksCommand extends Command
 {
     public $signature = 'filament-tweaks';
 

@@ -46,8 +46,8 @@ return [
 ## Usage
 
 ```php
-$dowhileFilament = new Dowhile\FilamentTweaks();
-echo $dowhileFilament->echoPhrase('Hello, Dowhile!');
+$filamentTweaks = new Dowhile\FilamentTweaks();
+echo $filamentTweaks->echoPhrase('Hello, Dowhile!');
 ```
 
 ## Testing

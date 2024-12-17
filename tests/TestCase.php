@@ -4,7 +4,7 @@ namespace Dowhile\FilamentTweaks\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
-use Dowhile\FilamentTweaks\DowhileFilamentServiceProvider;
+use Dowhile\FilamentTweaks\FilamentTweaksServiceProvider;
 use Filament\Actions\ActionsServiceProvider;
 use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
@@ -44,7 +44,7 @@ class TestCase extends Orchestra
             SupportServiceProvider::class,
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
-            DowhileFilamentServiceProvider::class,
+            FilamentTweaksServiceProvider::class,
         ];
     }
 

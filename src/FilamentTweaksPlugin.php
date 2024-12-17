@@ -5,7 +5,7 @@ namespace Dowhile\FilamentTweaks;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class DowhileFilamentPlugin implements Plugin
+class FilamentTweaksPlugin implements Plugin
 {
     public function getId(): string
     {
