@@ -1,1 +1,27 @@
-@import '../../vendor/filament/filament/resources/css/theme.css';
+[x-cloak] {
+    display: none;
+}
+
+.dir-rtl {
+    direction: rtl;
+}
+
+.dir-ltr {
+    direction: ltr;
+}
+
+[dir='rtl'] body .fi-input[type='tel'],
+[dir='rtl'] body .fi-input[type='email'],
+[dir='rtl'] body .fi-table-cell-email .fi-ta-text-item-label,
+[dir='rtl'] body .fi-table-cell-phone .fi-ta-text-item-label {
+    direction: ltr;
+    text-align: right;
+}
+
+@media (min-width: 640px) {
+    .fi-modal-footer-actions.sm\:grid {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+    }
+}
