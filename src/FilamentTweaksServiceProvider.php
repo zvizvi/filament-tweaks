@@ -6,6 +6,7 @@ use Dowhile\FilamentTweaks\Commands\FilamentTweaksCommand;
 use Dowhile\FilamentTweaks\Testing\TestsFilamentTweaks;
 use Filament\Actions\CreateAction;
 use Filament\Actions\MountableAction;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -110,6 +111,12 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
         });
         SelectFilter::configureUsing(function (SelectFilter $filter): void {
             $filter->native(false);
+        });
+
+        // Date time picker without seconds
+        DateTimePicker::configureUsing(function (DateTimePicker $dateTimePicker): void {
+            $dateTimePicker
+                ->seconds(false);
         });
 
         // Table style
