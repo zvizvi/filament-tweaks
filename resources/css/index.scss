@@ -10,12 +10,14 @@
     direction: ltr;
 }
 
-[dir='rtl'] body .fi-input[type='tel'],
-[dir='rtl'] body .fi-input[type='email'],
-[dir='rtl'] body .fi-table-cell-email .fi-ta-text-item-label,
-[dir='rtl'] body .fi-table-cell-phone .fi-ta-text-item-label {
-    direction: ltr;
-    text-align: right;
+[dir='rtl'] body {
+    .fi-input[type='tel'],
+    .fi-input[type='email'],
+    .fi-table-cell-email .fi-ta-text-item-label,
+    .fi-table-cell-phone .fi-ta-text-item-label {
+        direction: ltr;
+        text-align: right;
+    }
 }
 
 @media (min-width: 640px) {
