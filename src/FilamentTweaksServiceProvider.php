@@ -160,6 +160,22 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
             });
         }
 
+        // Configure plugins
+
+        // DateRangeFilter configuration
+        if (config('filament-tweaks.features.configure_date_range_picker', true)) {
+            $dateRangeFilterClass = 'Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter';
+
+            if (class_exists($dateRangeFilterClass)) {
+                $dateRangeFilterClass::configureUsing(function ($datePicker) {
+                    $datePicker
+                        ->firstDayOfWeek(7)
+                        ->autoApply(true)
+                        ->icon('heroicon-o-calendar');
+                });
+            }
+        }
+
         // Asset Registration
         FilamentAsset::register(
             $this->getAssets(),
@@ -197,11 +213,17 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
      */
     protected function getAssets(): array
     {
-        return [
+        $assets = [
             // AlpineComponent::make('filament-tweaks', __DIR__ . '/../resources/dist/components/filament-tweaks.js'),
             Css::make('filament-tweaks-styles', __DIR__.'/../resources/dist/filament-tweaks.css'),
             Js::make('filament-tweaks-scripts', __DIR__.'/../resources/dist/filament-tweaks.js'),
         ];
+
+        if (config('filament-tweaks.features.configure_date_range_picker', true)) {
+            $assets[] = Css::make('dowhile-filament-tweaks-daterangepicker-styles', __DIR__.'/../resources/css/date-range-picker.css');
+        }
+
+        return $assets;
     }
 
     /**

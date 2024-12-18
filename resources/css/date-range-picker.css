@@ -1,0 +1,57 @@
+/* daterangepicker plugin */
+[dir='rtl'] .fi-input[x-ref='daterange'] {
+    text-align: right;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    direction: ltr;
+}
+
+[dir='rtl'] .daterangepicker {
+    direction: rtl;
+}
+
+[dir='rtl'] .daterangepicker .ranges {
+    text-align: right;
+}
+
+[dir='rtl'] .daterangepicker .calendar-table .prev span {
+    transform: rotate(-45deg);
+}
+
+[dir='rtl'] .daterangepicker .calendar-table .next span {
+    transform: rotate(135deg);
+}
+
+[dir='rtl'] .daterangepicker td.start-date {
+    border-radius: 0 4px 4px 0;
+}
+
+[dir='rtl'] .daterangepicker td.end-date {
+    border-radius: 4px 0 0 4px;
+}
+
+[dir='rtl'] .daterangepicker td.start-date.end-date {
+    border-radius: 4px;
+}
+
+[dir='rtl'] .daterangepicker .drp-buttons {
+    text-align: left;
+}
+
+[dir='rtl'] .daterangepicker .drp-buttons .btn {
+    margin-right: 8px;
+    margin-left: unset;
+}
+
+[dir='rtl'] .daterangepicker .drp-selected {
+    padding-left: 8px;
+    padding-right: unset;
+}
+
+@media (min-width: 564px) {
+    [dir='rtl'] .daterangepicker .drp-calendar,
+    [dir='rtl'] .daterangepicker .ranges {
+        float: right;
+    }
+}
+

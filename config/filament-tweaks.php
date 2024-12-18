@@ -36,5 +36,8 @@ return [
 
         // Enable currency mask macro for TextInput
         'enable_currency_mask' => true,
+
+        // Configure date range picker
+        'configure_date_range_picker' => true,
     ],
 ];
