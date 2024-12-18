@@ -79,73 +79,89 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         // Disable default readOnlyRelationManagersOnResourceViewPagesByDefault
-        $panels = Filament::getPanels();
-        foreach ($panels as $panel) {
-            $panel->readOnlyRelationManagersOnResourceViewPagesByDefault(false);
+        if (config('filament-tweaks.features.disable_readonly_relation_managers', true)) {
+            $panels = Filament::getPanels();
+            foreach ($panels as $panel) {
+                $panel->readOnlyRelationManagersOnResourceViewPagesByDefault(false);
+            }
         }
 
         // Centering form actions
-        BasePage::$formActionsAlignment = Alignment::Center;
-        MountableAction::configureUsing(function (MountableAction $action) {
-            $action->modalFooterActionsAlignment(Alignment::Center);
-        });
+        if (config('filament-tweaks.features.center_form_actions', true)) {
+            BasePage::$formActionsAlignment = Alignment::Center;
+            MountableAction::configureUsing(function (MountableAction $action) {
+                $action->modalFooterActionsAlignment(Alignment::Center);
+            });
+        }
 
         // Disable CreateAndCreateAnother
-        CreateRecord::disableCreateAnother();
-        CreateAction::configureUsing(fn (CreateAction $action) => $action->createAnother(false));
-        TablesCreateAction::configureUsing(fn (TablesCreateAction $action) => $action->createAnother(false));
+        if (config('filament-tweaks.features.disable_create_another', true)) {
+            CreateRecord::disableCreateAnother();
+            CreateAction::configureUsing(fn (CreateAction $action) => $action->createAnother(false));
+            TablesCreateAction::configureUsing(fn (TablesCreateAction $action) => $action->createAnother(false));
+        }
 
         // Set translateLabel for all actions
-        MountableAction::configureUsing(function (MountableAction $action) {
-            $action->translateLabel();
-        });
-        Column::configureUsing(function (Column $column): void {
-            $column->translateLabel();
-        });
-        BaseFilter::configureUsing(function (BaseFilter $filter): void {
-            $filter->translateLabel();
-        });
-        Field::configureUsing(function (Field $field): void {
-            $field->translateLabel();
-        });
-        Entry::configureUsing(function (Entry $entry): void {
-            $entry->translateLabel();
-        });
+        if (config('filament-tweaks.features.translate_labels', true)) {
+            MountableAction::configureUsing(function (MountableAction $action) {
+                $action->translateLabel();
+            });
+            Column::configureUsing(function (Column $column): void {
+                $column->translateLabel();
+            });
+            BaseFilter::configureUsing(function (BaseFilter $filter): void {
+                $filter->translateLabel();
+            });
+            Field::configureUsing(function (Field $field): void {
+                $field->translateLabel();
+            });
+            Entry::configureUsing(function (Entry $entry): void {
+                $entry->translateLabel();
+            });
+        }
 
         // Not native select
-        Select::configureUsing(function (Select $select): void {
-            $select->native(false);
-        });
-        SelectFilter::configureUsing(function (SelectFilter $filter): void {
-            $filter->native(false);
-        });
+        if (config('filament-tweaks.features.non_native_select', true)) {
+            Select::configureUsing(function (Select $select): void {
+                $select->native(false);
+            });
+            SelectFilter::configureUsing(function (SelectFilter $filter): void {
+                $filter->native(false);
+            });
+        }
 
         // Date time picker without seconds and week starts on sunday
-        DateTimePicker::configureUsing(function (DateTimePicker $dateTimePicker): void {
-            $dateTimePicker
-                ->seconds(false)
-                ->weekStartsOnSunday();
-        });
+        if (config('filament-tweaks.features.configure_datetime_picker', true)) {
+            DateTimePicker::configureUsing(function (DateTimePicker $dateTimePicker): void {
+                $dateTimePicker
+                    ->seconds(false)
+                    ->weekStartsOnSunday();
+            });
+        }
 
         // Table style
-        Table::configureUsing(function (Table $table): void {
-            $table
-                ->striped()
-                ->defaultPaginationPageOption(25);
-        });
+        if (config('filament-tweaks.features.configure_table_styling', true)) {
+            Table::configureUsing(function (Table $table): void {
+                $table
+                    ->striped()
+                    ->defaultPaginationPageOption(25);
+            });
+        }
 
         // Macros
-        TextInput::macro('currencyMask', function (): TextInput {
-            /**
-             * @var TextInput $this
-             */
-            return $this->numeric()
-                ->mask(RawJs::make('$money($input)'))
-                ->stripCharacters(',')
-                ->extraInputAttributes([
-                    'maxlength' => '12',
-                ]);
-        });
+        if (config('filament-tweaks.features.enable_currency_mask', true)) {
+            TextInput::macro('currencyMask', function (): TextInput {
+                /**
+                 * @var TextInput $this
+                 */
+                return $this->numeric()
+                    ->mask(RawJs::make('$money($input)'))
+                    ->stripCharacters(',')
+                    ->extraInputAttributes([
+                        'maxlength' => '12',
+                    ]);
+            });
+        }
 
         // Asset Registration
         FilamentAsset::register(
