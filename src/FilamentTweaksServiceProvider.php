@@ -113,10 +113,11 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
             $filter->native(false);
         });
 
-        // Date time picker without seconds
+        // Date time picker without seconds and week starts on sunday
         DateTimePicker::configureUsing(function (DateTimePicker $dateTimePicker): void {
             $dateTimePicker
-                ->seconds(false);
+                ->seconds(false)
+                ->weekStartsOnSunday();
         });
 
         // Table style
