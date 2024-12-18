@@ -103,21 +103,18 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
 
         // Set translateLabel for all actions
         if (config('filament-tweaks.features.translate_labels', true)) {
-            MountableAction::configureUsing(function (MountableAction $action) {
-                $action->translateLabel();
-            });
-            Column::configureUsing(function (Column $column): void {
-                $column->translateLabel();
-            });
-            BaseFilter::configureUsing(function (BaseFilter $filter): void {
-                $filter->translateLabel();
-            });
-            Field::configureUsing(function (Field $field): void {
-                $field->translateLabel();
-            });
-            Entry::configureUsing(function (Entry $entry): void {
-                $entry->translateLabel();
-            });
+            $components = [
+                BaseFilter::class,
+                Column::class,
+                Entry::class,
+                Field::class,
+                MountableAction::class,
+            ];
+            foreach ($components as $component) {
+                $component::configureUsing(function ($c): void {
+                    $c->translateLabel();
+                });
+            }
         }
 
         // Not native select
@@ -148,7 +145,7 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
             });
         }
 
-        // Macros
+        // Currency mask for text inputs
         if (config('filament-tweaks.features.enable_currency_mask', true)) {
             TextInput::macro('currencyMask', function (): TextInput {
                 /**
