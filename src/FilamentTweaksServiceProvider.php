@@ -6,6 +6,7 @@ use Dowhile\FilamentTweaks\Commands\FilamentTweaksCommand;
 use Dowhile\FilamentTweaks\Testing\TestsFilamentTweaks;
 use Filament\Actions\CreateAction;
 use Filament\Actions\MountableAction;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Select;
@@ -77,6 +78,12 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        // Disable default readOnlyRelationManagersOnResourceViewPagesByDefault
+        $panels = Filament::getPanels();
+        foreach ($panels as $panel) {
+            $panel->readOnlyRelationManagersOnResourceViewPagesByDefault(false);
+        }
+
         // Centering form actions
         BasePage::$formActionsAlignment = Alignment::Center;
         MountableAction::configureUsing(function (MountableAction $action) {
