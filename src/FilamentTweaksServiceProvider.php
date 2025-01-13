@@ -9,6 +9,7 @@ use Filament\Actions\MountableAction;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Field;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\Entry;
@@ -111,6 +112,7 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
                 Entry::class,
                 Field::class,
                 MountableAction::class,
+                Placeholder::class,
             ];
             foreach ($components as $component) {
                 $component::configureUsing(function ($c): void {
