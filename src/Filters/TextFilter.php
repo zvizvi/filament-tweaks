@@ -19,16 +19,16 @@ class TextFilter extends BaseFilter
 
         $this->form([
             TextInput::make($this->name)
-                ->label(fn(): string => $this->getLabel()),
+                ->label(fn (): string => $this->getLabel()),
         ])
             ->query(function (Builder $query, array $state): Builder {
                 return ! empty($state[$this->name])
                     ? $query->where($this->name, $this->operator, "%{$state[$this->name]}%")
                     : $query;
             })
-            ->indicateUsing(function (array $state): Indicator|null {
+            ->indicateUsing(function (array $state): ?Indicator {
                 return ! empty($state[$this->name])
-                    ? Indicator::make($this->getLabel() . ': ' . $state[$this->name])
+                    ? Indicator::make($this->getLabel().': '.$state[$this->name])
                     : null;
             });
     }
@@ -51,6 +51,7 @@ class TextFilter extends BaseFilter
     public function numeric(bool $numeric = true): self
     {
         $this->getFormSchema()[0]->numeric($numeric);
+
         return $this;
     }
 }
