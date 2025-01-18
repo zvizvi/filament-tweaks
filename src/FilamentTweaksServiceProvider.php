@@ -149,6 +149,16 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
             });
         }
 
+        // Customize system icons
+        if (config('filament-tweaks.features.customize_system_icons', false)) {
+            FilamentIcon::register([
+                'panels::sidebar.collapse-button' => 'heroicon-o-bars-3-bottom-right',
+                'panels::sidebar.collapse-button.rtl' => 'heroicon-o-bars-3-bottom-left',
+                'panels::sidebar.expand-button' => 'heroicon-o-bars-3',
+                'panels::sidebar.expand-button.rtl' => 'heroicon-o-bars-3',
+            ]);
+        }
+
         // Currency mask for text inputs
         if (config('filament-tweaks.features.enable_currency_mask', true)) {
             TextInput::macro('currencyMask', function (): TextInput {

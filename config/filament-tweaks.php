@@ -34,6 +34,9 @@ return [
         // Configure table styling (striped and 25 items per page)
         'configure_table_styling' => true,
 
+        // Customize system icons (sidebar, buttons, etc.)
+        'customize_system_icons' => false,
+
         // Enable currency mask macro for TextInput
         'enable_currency_mask' => true,
 
