@@ -25,6 +25,7 @@ use Filament\Support\Enums\Alignment;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Filament\Support\RawJs;
+use Filament\Tables\Actions\AssociateAction;
 use Filament\Tables\Actions\AttachAction;
 use Filament\Tables\Actions\CreateAction as TablesCreateAction;
 use Filament\Tables\Columns\Column;
@@ -105,6 +106,7 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
             CreateAction::configureUsing(fn (CreateAction $action) => $action->createAnother(false));
             TablesCreateAction::configureUsing(fn (TablesCreateAction $action) => $action->createAnother(false));
             AttachAction::configureUsing(fn (AttachAction $action) => $action->attachAnother(false));
+            AssociateAction::configureUsing(fn (AssociateAction $action) => $action->associateAnother(false));
         }
 
         // Set translateLabel for all actions
