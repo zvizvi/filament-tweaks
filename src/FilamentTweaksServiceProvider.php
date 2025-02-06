@@ -4,18 +4,16 @@ namespace Dowhile\FilamentTweaks;
 
 use Dowhile\FilamentTweaks\Commands\FilamentTweaksCommand;
 use Dowhile\FilamentTweaks\Testing\TestsFilamentTweaks;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\MountableAction;
 use Filament\Actions\StaticAction;
 use Filament\Facades\Filament;
+use Filament\Forms\Components\Component;
 use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Field;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TextInput;
-use Filament\Infolists\Components\Entry;
-use Filament\Infolists\Components\Tabs\Tab as InfolistTab;
+use Filament\Infolists\Components\Component as InfolistComponent;
 use Filament\Pages\BasePage;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Support\Assets\Asset;
@@ -114,12 +112,10 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
             $components = [
                 BaseFilter::class,
                 Column::class,
-                Entry::class,
-                Field::class,
+                Component::class,
+                InfolistComponent::class,
                 StaticAction::class,
-                Placeholder::class,
-                Tab::class,
-                InfolistTab::class,
+                ActionGroup::class,
             ];
             foreach ($components as $component) {
                 $component::configureUsing(function ($c): void {
