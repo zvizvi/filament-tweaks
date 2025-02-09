@@ -10,6 +10,15 @@
     direction: ltr;
 }
 
+@media (min-width: 640px) {
+    .fi-modal-footer-actions.sm\:grid {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+    }
+}
+
+/* RTL customizations */
 [dir='rtl'] body {
     .fi-input[type='tel'],
     .fi-input[type='email'],
@@ -20,10 +29,11 @@
     }
 }
 
-@media (min-width: 640px) {
-    .fi-modal-footer-actions.sm\:grid {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: center;
-    }
+[dir='rtl'] body > #nprogress {
+    transform: scaleX(-1);
+    position: fixed;
+    right: 0;
+    top: 0;
+    left: 0;
+    z-index: 1099;
 }
