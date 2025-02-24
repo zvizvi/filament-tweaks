@@ -82,6 +82,14 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        $panels = Filament::getPanels();
+        foreach ($panels as $panel) {
+            $panel
+                ->sidebarCollapsibleOnDesktop()
+                ->brandName(env('APP_NAME'))
+                ->spa();
+        }
+
         // Disable default readOnlyRelationManagersOnResourceViewPagesByDefault
         if (config('filament-tweaks.features.disable_readonly_relation_managers', true)) {
             $panels = Filament::getPanels();
