@@ -37,3 +37,7 @@
     left: 0;
     z-index: 1099;
 }
+
+[dir='rtl'] [data-trix-button-group='history-tools'] .fi-fo-rich-editor-toolbar-btn svg {
+    transform: rotateY(180deg);
+}
