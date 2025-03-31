@@ -40,6 +40,9 @@ return [
         // Enable currency mask macro for TextInput
         'enable_currency_mask' => true,
 
+        // Enable autogrow macro for Textarea
+        'enable_autogrow_textarea' => true,
+
         // Configure date range picker
         'configure_date_range_picker' => true,
     ],

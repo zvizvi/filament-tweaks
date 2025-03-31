@@ -18,6 +18,11 @@
     }
 }
 
+textarea.autogrow {
+    field-sizing: content;
+    min-height: 60px;
+}
+
 /* RTL customizations */
 [dir='rtl'] body {
     .fi-input[type='tel'],

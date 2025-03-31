@@ -12,6 +12,7 @@ use Filament\Facades\Filament;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\Component as InfolistComponent;
 use Filament\Pages\BasePage;
@@ -182,6 +183,12 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
                     ->extraInputAttributes([
                         'maxlength' => '12',
                     ]);
+            });
+        }
+
+        if (config('filament-tweaks.features.enable_autogrow_textarea', true)) {
+            Textarea::macro('autogrow', function (): Textarea {
+                return $this->extraInputAttributes(['class' => 'autogrow']);
             });
         }
 
