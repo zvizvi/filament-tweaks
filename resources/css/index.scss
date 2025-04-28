@@ -46,3 +46,7 @@ textarea.autogrow {
 [dir='rtl'] [data-trix-button-group='history-tools'] .fi-fo-rich-editor-toolbar-btn svg {
     transform: rotateY(180deg);
 }
+
+[dir='rtl'] .fi-select-input {
+    background-position: left .5rem center;
+}
