@@ -10,8 +10,8 @@
     direction: ltr;
 }
 
-@media (min-width: 640px) {
-    .fi-modal-footer-actions.sm\:grid {
+@media (min-width: 40rem) {
+    .fi-modal .fi-modal-footer.fi-align-center .fi-modal-footer-actions {
         display: flex;
         flex-direction: row-reverse;
         justify-content: center;
@@ -27,8 +27,8 @@ textarea.autogrow {
 [dir='rtl'] body {
     .fi-input[type='tel'],
     .fi-input[type='email'],
-    .fi-table-cell-email .fi-ta-text-item-label,
-    .fi-table-cell-phone .fi-ta-text-item-label {
+    .fi-ta-cell-email .fi-ta-text-item,
+    .fi-ta-cell-phone .fi-ta-text-item {
         direction: ltr;
         text-align: right;
     }

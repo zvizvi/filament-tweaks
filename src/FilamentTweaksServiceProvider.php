@@ -4,17 +4,18 @@ namespace Dowhile\FilamentTweaks;
 
 use Dowhile\FilamentTweaks\Commands\FilamentTweaksCommand;
 use Dowhile\FilamentTweaks\Testing\TestsFilamentTweaks;
+use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
+use Filament\Actions\AssociateAction;
+use Filament\Actions\AttachAction;
 use Filament\Actions\CreateAction;
-use Filament\Actions\MountableAction;
-use Filament\Actions\StaticAction;
 use Filament\Facades\Filament;
-use Filament\Forms\Components\Component;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Infolists\Components\Component as InfolistComponent;
+use Filament\Infolists\Components\Entry;
 use Filament\Pages\BasePage;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Support\Assets\Asset;
@@ -24,9 +25,6 @@ use Filament\Support\Enums\Alignment;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Filament\Support\RawJs;
-use Filament\Tables\Actions\AssociateAction;
-use Filament\Tables\Actions\AttachAction;
-use Filament\Tables\Actions\CreateAction as TablesCreateAction;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Filters\BaseFilter;
 use Filament\Tables\Filters\SelectFilter;
@@ -102,7 +100,7 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
         // Centering form actions
         if (config('filament-tweaks.features.center_form_actions', true)) {
             BasePage::$formActionsAlignment = Alignment::Center;
-            MountableAction::configureUsing(function (MountableAction $action) {
+            Action::configureUsing(function (Action $action) {
                 $action->modalFooterActionsAlignment(Alignment::Center);
             });
         }
@@ -111,7 +109,6 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
         if (config('filament-tweaks.features.disable_create_another', true)) {
             CreateRecord::disableCreateAnother();
             CreateAction::configureUsing(fn (CreateAction $action) => $action->createAnother(false));
-            TablesCreateAction::configureUsing(fn (TablesCreateAction $action) => $action->createAnother(false));
             AttachAction::configureUsing(fn (AttachAction $action) => $action->attachAnother(false));
             AssociateAction::configureUsing(fn (AssociateAction $action) => $action->associateAnother(false));
         }
@@ -121,9 +118,9 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
             $components = [
                 BaseFilter::class,
                 Column::class,
-                Component::class,
-                InfolistComponent::class,
-                StaticAction::class,
+                Field::class,
+                Entry::class,
+                Action::class,
                 ActionGroup::class,
             ];
             foreach ($components as $component) {
