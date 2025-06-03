@@ -86,6 +86,8 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
             $panel
                 ->sidebarCollapsibleOnDesktop()
                 ->brandName(env('APP_NAME'))
+                ->resourceCreatePageRedirect('view')
+                ->resourceEditPageRedirect('view')
                 ->spa();
         }
 
