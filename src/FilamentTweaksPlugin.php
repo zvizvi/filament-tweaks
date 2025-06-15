@@ -107,6 +107,8 @@ class FilamentTweaksPlugin implements Plugin
             Table::configureUsing(function (Table $table): void {
                 $table
                     ->striped()
+                    ->reorderableColumns()
+                    ->deferColumnManager(false)
                     ->defaultPaginationPageOption(25);
             });
         }
