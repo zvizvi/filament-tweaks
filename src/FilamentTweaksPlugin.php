@@ -17,6 +17,7 @@ use Filament\Infolists\Components\Entry;
 use Filament\Pages\BasePage;
 use Filament\Panel;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Facades\FilamentIcon;
 use Filament\Support\RawJs;
@@ -75,6 +76,7 @@ class FilamentTweaksPlugin implements Plugin
                 Entry::class,
                 Action::class,
                 ActionGroup::class,
+                Tab::class,
             ];
             foreach ($components as $component) {
                 $component::configureUsing(function ($c): void {
