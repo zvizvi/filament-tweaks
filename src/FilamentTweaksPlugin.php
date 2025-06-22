@@ -110,6 +110,7 @@ class FilamentTweaksPlugin implements Plugin
                 $table
                     ->striped()
                     ->reorderableColumns()
+                    ->deferFilters(false)
                     ->deferColumnManager(false)
                     ->defaultPaginationPageOption(25);
             });
