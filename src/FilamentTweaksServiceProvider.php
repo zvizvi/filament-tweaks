@@ -171,6 +171,22 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
             ]);
         }
 
+        // Make all columns toggleable
+        if (config('filament-tweaks.features.enable_all_columns_toggleable', true)) {
+            Table::macro('allColumnsToggleable', function () {
+                /** @var Table $this */
+                $columns = $this->getColumns();
+                foreach ($columns as $column) {
+                    /** @var Column $column */
+                    $column->toggleable(isToggledHiddenByDefault: $column->isToggledHiddenByDefault());
+                }
+
+                $this->columnToggleFormMaxHeight($this->getColumnToggleFormMaxHeight() ?? '500px');
+
+                return $this;
+            });
+        }
+
         // Currency mask for text inputs
         if (config('filament-tweaks.features.enable_currency_mask', true)) {
             TextInput::macro('currencyMask', function (): TextInput {

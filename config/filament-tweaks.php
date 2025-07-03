@@ -37,6 +37,9 @@ return [
         // Customize system icons (sidebar, buttons, etc.)
         'customize_system_icons' => false,
 
+        // Enable all columns toggleable
+        'enable_all_columns_toggleable' => true,
+
         // Enable currency mask macro for TextInput
         'enable_currency_mask' => true,
 
