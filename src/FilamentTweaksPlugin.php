@@ -117,10 +117,10 @@ class FilamentTweaksPlugin implements Plugin
         }
 
         // Customize system icons
-        if (config('filament-tweaks.features.customize_system_icons', false)) {
+        if (config('filament-tweaks.features.customize_system_icons', true)) {
             FilamentIcon::register([
-                'panels::sidebar.collapse-button' => 'heroicon-o-bars-3-bottom-right',
-                'panels::sidebar.collapse-button.rtl' => 'heroicon-o-bars-3-bottom-left',
+                'panels::sidebar.collapse-button' => 'heroicon-o-bars-3-bottom-left',
+                'panels::sidebar.collapse-button.rtl' => 'heroicon-o-bars-3-bottom-right',
                 'panels::sidebar.expand-button' => 'heroicon-o-bars-3',
                 'panels::sidebar.expand-button.rtl' => 'heroicon-o-bars-3',
             ]);
