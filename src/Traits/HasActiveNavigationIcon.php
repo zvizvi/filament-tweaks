@@ -6,8 +6,8 @@ trait HasActiveNavigationIcon
 {
     public static function getActiveNavigationIcon(): ?string
     {
-        return str(self::getNavigationIcon())
-            ->replace('heroicon-o', 'heroicon-s')
+        return 'heroicon-' . str(self::getNavigationIcon()->value)
+            ->replace('o-', 's-')
             ->toString();
     }
 }
