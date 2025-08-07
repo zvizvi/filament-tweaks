@@ -9,26 +9,24 @@ use Illuminate\Database\Eloquent\Builder;
 
 class TextFilter extends BaseFilter
 {
-    public string $name;
-
     protected string $operator = 'like';
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->form([
-            TextInput::make($this->name)
+        $this->schema([
+            TextInput::make($this->getName())
                 ->label(fn (): string => $this->getLabel()),
         ])
             ->query(function (Builder $query, array $state): Builder {
-                return ! empty($state[$this->name])
-                    ? $query->where($this->name, $this->operator, "%{$state[$this->name]}%")
+                return ! empty($state[$this->getName()])
+                    ? $query->where($this->getName(), $this->operator, "%{$state[$this->getName()]}%")
                     : $query;
             })
             ->indicateUsing(function (array $state): ?Indicator {
-                return ! empty($state[$this->name])
-                    ? Indicator::make($this->getLabel().': '.$state[$this->name])
+                return ! empty($state[$this->getName()])
+                    ? Indicator::make($this->getLabel().': '.$state[$this->getName()])
                     : null;
             });
     }
@@ -50,7 +48,7 @@ class TextFilter extends BaseFilter
 
     public function numeric(bool $numeric = true): self
     {
-        $this->getFormSchema()[0]->numeric($numeric);
+        $this->getSchemaComponents()[0]->numeric($numeric);
 
         return $this;
     }
