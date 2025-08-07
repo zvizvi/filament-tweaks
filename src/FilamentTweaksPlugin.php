@@ -18,6 +18,7 @@ use Filament\Pages\BasePage;
 use Filament\Panel;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Schema;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Facades\FilamentIcon;
 use Filament\Support\RawJs;
@@ -102,6 +103,29 @@ class FilamentTweaksPlugin implements Plugin
                     ->seconds(false)
                     ->weekStartsOnSunday();
             });
+        }
+
+        // Format date time and currency
+        $dateTimeFormat = config('filament-tweaks.formats.datetime', false);
+        $dateFormat = config('filament-tweaks.formats.date', false);
+        $timeFormat = config('filament-tweaks.formats.time', false);
+        $currency = config('filament-tweaks.formats.currency', false);
+
+        if ($dateFormat) {
+            Table::configureUsing(fn (Table $table) => $table->defaultDateDisplayFormat($dateFormat));
+            Schema::configureUsing(fn (Schema $schema) => $schema->defaultDateDisplayFormat($dateFormat));
+        }
+        if ($dateTimeFormat) {
+            Table::configureUsing(fn (Table $table) => $table->defaultDateTimeDisplayFormat($dateTimeFormat));
+            Schema::configureUsing(fn (Schema $schema) => $schema->defaultDateTimeDisplayFormat($dateTimeFormat));
+        }
+        if ($timeFormat) {
+            Table::configureUsing(fn (Table $table) => $table->defaultTimeDisplayFormat($timeFormat));
+            Schema::configureUsing(fn (Schema $schema) => $schema->defaultTimeDisplayFormat($timeFormat));
+        }
+        if ($currency) {
+            Table::configureUsing(fn (Table $table) => $table->defaultCurrency($currency));
+            Schema::configureUsing(fn (Schema $schema) => $schema->defaultCurrency($currency));
         }
 
         // Table style

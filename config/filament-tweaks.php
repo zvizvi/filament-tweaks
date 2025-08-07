@@ -49,4 +49,11 @@ return [
         // Configure date range picker
         'configure_date_range_picker' => true,
     ],
+
+    'formats' => [
+        // 'date' => 'M j, Y',
+        // 'time' => 'H:i:s',
+        // 'datetime' => 'M j, Y H:i:s',
+        // 'currency' => 'usd',
+    ],
 ];
