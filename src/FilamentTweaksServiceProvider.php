@@ -19,7 +19,6 @@ use Filament\Pages\BasePage;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
-use Filament\Support\Assets\Js;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
@@ -272,7 +271,6 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
         $assets = [
             // AlpineComponent::make('filament-tweaks', __DIR__ . '/../resources/dist/components/filament-tweaks.js'),
             Css::make('filament-tweaks-styles', __DIR__.'/../resources/dist/filament-tweaks.css'),
-            Js::make('filament-tweaks-scripts', __DIR__.'/../resources/dist/filament-tweaks.js'),
         ];
 
         if (config('filament-tweaks.features.configure_date_range_picker', true)) {
