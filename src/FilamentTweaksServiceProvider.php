@@ -203,8 +203,16 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
         }
 
         if (config('filament-tweaks.features.enable_autogrow_textarea', true)) {
-            Textarea::macro('autogrow', function (): Textarea {
-                return $this->extraInputAttributes(['class' => 'autogrow']);
+            Textarea::macro('autogrow', function ($maxHeight = null): Textarea {
+                /**
+                 * @var Textarea $this
+                 */
+                $attributes = ['class' => 'autogrow'];
+                if ($maxHeight) {
+                    $attributes['style'] = 'max-height:'.$maxHeight;
+                }
+
+                return $this->extraInputAttributes($attributes);
             });
         }
 
