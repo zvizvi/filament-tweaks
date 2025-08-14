@@ -19,9 +19,11 @@ class RangeFilter extends Filter
                 ->schema([
                     TextInput::make($this->getFromFieldName())
                         ->label('מינימום')
+                        ->minValue(0)
                         ->numeric(),
                     TextInput::make($this->getToFieldName())
                         ->label('מקסימום')
+                        ->minValue(0)
                         ->numeric(),
                 ])
                 ->columnSpanFull(),
