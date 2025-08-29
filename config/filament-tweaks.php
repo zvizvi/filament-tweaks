@@ -51,9 +51,10 @@ return [
     ],
 
     'formats' => [
-        // 'date' => 'M j, Y',
+        // 'date' => 'd/m/Y',
         // 'time' => 'H:i:s',
-        // 'datetime' => 'M j, Y H:i:s',
-        // 'currency' => 'usd',
+        // 'datetime' => 'd/m/Y H:i:s',
+        // 'currency' => 'ils',
+        // 'timezone' => 'Asia/Jerusalem',
     ],
 ];

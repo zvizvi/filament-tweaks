@@ -21,6 +21,7 @@ use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Facades\FilamentIcon;
+use Filament\Support\Facades\FilamentTimezone;
 use Filament\Support\RawJs;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Filters\BaseFilter;
@@ -110,6 +111,7 @@ class FilamentTweaksPlugin implements Plugin
         $dateFormat = config('filament-tweaks.formats.date', false);
         $timeFormat = config('filament-tweaks.formats.time', false);
         $currency = config('filament-tweaks.formats.currency', false);
+        $timezone = config('filament-tweaks.formats.timezone', false);
 
         if ($dateFormat) {
             Table::configureUsing(fn (Table $table) => $table->defaultDateDisplayFormat($dateFormat));
@@ -126,6 +128,9 @@ class FilamentTweaksPlugin implements Plugin
         if ($currency) {
             Table::configureUsing(fn (Table $table) => $table->defaultCurrency($currency));
             Schema::configureUsing(fn (Schema $schema) => $schema->defaultCurrency($currency));
+        }
+        if ($timezone) {
+            FilamentTimezone::set($timezone);
         }
 
         // Table style
