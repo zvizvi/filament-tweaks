@@ -10,6 +10,11 @@
     direction: ltr;
 }
 
+/* fix table filters */
+.fi-ta-ctn-with-header .fi-ta-filters-dropdown .fi-dropdown-panel {
+    z-index: 30;
+}
+
 @media (min-width: 40rem) {
     .fi-modal .fi-modal-footer.fi-align-center .fi-modal-footer-actions {
         display: flex;
