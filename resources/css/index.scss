@@ -48,10 +48,14 @@ textarea.autogrow {
     z-index: 1099;
 }
 
-[dir='rtl'] [data-trix-button-group='history-tools'] .fi-fo-rich-editor-toolbar-btn svg {
-    transform: rotateY(180deg);
-}
-
-[dir='rtl'] .fi-select-input {
-    background-position: left .5rem center;
+[dir='rtl'] {
+    [x-on\:click*=".setTextAlign('start').run()"],
+    [x-on\:click*=".setTextAlign('end').run()"],
+    [x-on\:click*=".undo().run()"],
+    [x-on\:click*=".redo().run()"],
+    [x-on\:click*=".setTextAlign('justify').run()"] {
+        &.fi-fo-rich-editor-tool svg {
+            transform: rotateY(180deg);
+        }
+    }
 }
