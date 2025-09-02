@@ -34,6 +34,9 @@ return [
         // Configure table styling (striped and 25 items per page)
         'configure_table_styling' => true,
 
+        // Enable rich editor toolbar buttons
+        'enable_rich_editor_toolbar_buttons' => true,
+
         // Customize system icons (sidebar, buttons, etc.)
         'customize_system_icons' => false,
 

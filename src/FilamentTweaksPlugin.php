@@ -10,6 +10,7 @@ use Filament\Actions\CreateAction;
 use Filament\Contracts\Plugin;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Field;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -142,6 +143,19 @@ class FilamentTweaksPlugin implements Plugin
                     ->deferFilters(false)
                     ->deferColumnManager(false)
                     ->defaultPaginationPageOption(25);
+            });
+        }
+
+        if (config('filament-tweaks.features.enable_rich_editor_toolbar_buttons', true)) {
+            RichEditor::configureUsing(function (RichEditor $editor) {
+                $editor->toolbarButtons([
+                    ['bold', 'italic', 'underline', 'strike', 'subscript', 'superscript', 'link'],
+                    ['h1', 'h2', 'h3', 'alignStart', 'alignCenter', 'alignEnd', 'alignJustify'],
+                    ['blockquote', 'codeBlock', 'bulletList', 'orderedList'],
+                    ['table', 'attachFiles'],
+                    ['clearFormatting'],
+                    ['undo', 'redo'],
+                ]);
             });
         }
 
