@@ -18,7 +18,10 @@ use Filament\Infolists\Components\Entry;
 use Filament\Pages\BasePage;
 use Filament\Panel;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Schemas\Components\FusedGroup;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Components\Wizard\Step;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Facades\FilamentIcon;
@@ -73,12 +76,15 @@ class FilamentTweaksPlugin implements Plugin
         // Set translateLabel for all actions
         if (config('filament-tweaks.features.translate_labels', true)) {
             $components = [
-                BaseFilter::class,
-                Column::class,
-                Field::class,
-                Entry::class,
                 Action::class,
                 ActionGroup::class,
+                BaseFilter::class,
+                Column::class,
+                Entry::class,
+                Field::class,
+                FusedGroup::class,
+                Section::class,
+                Step::class,
                 Tab::class,
             ];
             foreach ($components as $component) {
