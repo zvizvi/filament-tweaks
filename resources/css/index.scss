@@ -43,6 +43,10 @@ textarea.autogrow {
     z-index: 1099;
 }
 
+[dir='rtl'] .fi-btn-group > .fi-btn:not(:nth-child(1 of.fi-btn)) {
+    --tw-shadow: 1px 0 0 0 var(--tw-shadow-color, var(--color-gray-200));
+}
+
 [dir='rtl'] {
     [x-on\:click*=".setTextAlign('start').run()"],
     [x-on\:click*=".setTextAlign('end').run()"],
