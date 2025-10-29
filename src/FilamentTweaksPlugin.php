@@ -18,6 +18,7 @@ use Filament\Infolists\Components\Entry;
 use Filament\Pages\BasePage;
 use Filament\Panel;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Schemas\Components\EmptyState;
 use Filament\Schemas\Components\FusedGroup;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -90,6 +91,18 @@ class FilamentTweaksPlugin implements Plugin
             foreach ($components as $component) {
                 $component::configureUsing(function ($c): void {
                     $c->translateLabel();
+                });
+            }
+
+            $components = [
+                EmptyState::class,
+                Section::class,
+            ];
+            foreach ($components as $component) {
+                $component::configureUsing(function ($c): void {
+                    if ($c->getHeading()) {
+                        $c->heading(__($c->getHeading()));
+                    }
                 });
             }
         }
