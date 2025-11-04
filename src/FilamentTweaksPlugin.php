@@ -101,7 +101,10 @@ class FilamentTweaksPlugin implements Plugin
             foreach ($components as $component) {
                 $component::configureUsing(function ($c): void {
                     if ($c->getHeading()) {
-                        $c->heading(__($c->getHeading()));
+                        $heading = $c->getHeading();
+                        if ($heading && is_string($heading)) {
+                            $c->heading(__($heading));
+                        }
                     }
                 });
             }
