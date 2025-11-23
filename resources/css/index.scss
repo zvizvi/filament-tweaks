@@ -23,6 +23,26 @@ textarea.autogrow {
     min-height: 60px;
 }
 
+/* Hide dropdown icon and hover effects for single-tenant menu */
+.fi-tenant-menu:not(:has(.fi-dropdown-panel)) {
+    .fi-tenant-menu-trigger:hover,
+    .fi-tenant-menu-trigger:focus-visible {
+        background: unset !important;
+        cursor: default;
+    }
+}
+
+.fi-sidebar-open .fi-tenant-menu:not(:has(.fi-dropdown-panel)) {
+    .fi-icon {
+        display: none;
+    }
+
+    .fi-tenant-menu-trigger::after {
+        content: '';
+        margin-inline-start: auto;
+    }
+}
+
 /* RTL customizations */
 [dir='rtl'] body {
     .fi-input[type='tel'],
