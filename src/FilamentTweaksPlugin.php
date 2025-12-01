@@ -48,10 +48,14 @@ class FilamentTweaksPlugin implements Plugin
     public function boot(Panel $panel): void
     {
         $panel
-            ->sidebarCollapsibleOnDesktop()
             ->brandName(env('APP_NAME'))
             ->resourceCreatePageRedirect('view')
             ->resourceEditPageRedirect('view');
+
+        // Enable sidebar collapsible on desktop
+        if (config('filament-tweaks.features.sidebar_collapsible_on_desktop', true)) {
+            $panel->sidebarCollapsibleOnDesktop();
+        }
 
         // Disable default readOnlyRelationManagersOnResourceViewPagesByDefault
         if (config('filament-tweaks.features.disable_readonly_relation_managers', true)) {

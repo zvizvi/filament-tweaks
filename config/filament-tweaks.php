@@ -13,6 +13,9 @@ return [
     */
 
     'features' => [
+        // Enable sidebar collapsible on desktop
+        'sidebar_collapsible_on_desktop' => true,
+
         // Disable default readOnlyRelationManagersOnResourceViewPagesByDefault
         'disable_readonly_relation_managers' => true,
 
