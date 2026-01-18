@@ -4,9 +4,8 @@
     "scripts": {
         "dev:styles": "npx tailwindcss -i resources/css/index.scss -o resources/dist/filament-tweaks.css --postcss --watch",
         "dev:scripts": "node bin/build.js --dev",
-        "build:styles": "npx tailwindcss -i resources/css/index.scss -o resources/dist/filament-tweaks.css --postcss --minify && npm run purge",
+        "build:styles": "npx tailwindcss -i resources/css/index.scss -o resources/dist/filament-tweaks.css --postcss --minify",
         "build:scripts": "node bin/build.js",
-        "purge": "filament-purge -i resources/dist/filament-tweaks.css -o resources/dist/filament-tweaks.css -v 3.x",
         "dev": "npm-run-all --parallel dev:*",
         "build": "npm-run-all build:*"
     },

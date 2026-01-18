@@ -13,6 +13,9 @@ return [
     */
 
     'features' => [
+        // Enable sidebar collapsible on desktop
+        'sidebar_collapsible_on_desktop' => true,
+
         // Disable default readOnlyRelationManagersOnResourceViewPagesByDefault
         'disable_readonly_relation_managers' => true,
 
@@ -34,6 +37,9 @@ return [
         // Configure table styling (striped and 25 items per page)
         'configure_table_styling' => true,
 
+        // Enable rich editor toolbar buttons
+        'enable_rich_editor_toolbar_buttons' => true,
+
         // Customize system icons (sidebar, buttons, etc.)
         'customize_system_icons' => false,
 
@@ -48,5 +54,13 @@ return [
 
         // Configure date range picker
         'configure_date_range_picker' => true,
+    ],
+
+    'formats' => [
+        // 'date' => 'd/m/Y',
+        // 'time' => 'H:i:s',
+        // 'datetime' => 'd/m/Y H:i:s',
+        // 'currency' => 'ils',
+        // 'timezone' => 'Asia/Jerusalem',
     ],
 ];

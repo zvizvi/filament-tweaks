@@ -10,8 +10,8 @@
     direction: ltr;
 }
 
-@media (min-width: 640px) {
-    .fi-modal-footer-actions.sm\:grid {
+@media (min-width: 40rem) {
+    .fi-modal .fi-modal-footer.fi-align-center .fi-modal-footer-actions {
         display: flex;
         flex-direction: row-reverse;
         justify-content: center;
@@ -23,12 +23,32 @@ textarea.autogrow {
     min-height: 60px;
 }
 
+/* Hide dropdown icon and hover effects for single-tenant menu */
+.fi-tenant-menu:not(:has(.fi-dropdown-panel)) {
+    .fi-tenant-menu-trigger:hover,
+    .fi-tenant-menu-trigger:focus-visible {
+        background: unset !important;
+        cursor: default;
+    }
+}
+
+.fi-sidebar-open .fi-tenant-menu:not(:has(.fi-dropdown-panel)) {
+    .fi-icon {
+        display: none;
+    }
+
+    .fi-tenant-menu-trigger::after {
+        content: '';
+        margin-inline-start: auto;
+    }
+}
+
 /* RTL customizations */
 [dir='rtl'] body {
     .fi-input[type='tel'],
     .fi-input[type='email'],
-    .fi-table-cell-email .fi-ta-text-item-label,
-    .fi-table-cell-phone .fi-ta-text-item-label {
+    .fi-ta-cell-email .fi-ta-text-item,
+    .fi-ta-cell-phone .fi-ta-text-item {
         direction: ltr;
         text-align: right;
     }
@@ -43,6 +63,18 @@ textarea.autogrow {
     z-index: 1099;
 }
 
-[dir='rtl'] [data-trix-button-group='history-tools'] .fi-fo-rich-editor-toolbar-btn svg {
-    transform: rotateY(180deg);
+[dir='rtl'] .fi-btn-group > .fi-btn:not(:nth-child(1 of.fi-btn)) {
+    --tw-shadow: 1px 0 0 0 var(--tw-shadow-color, var(--color-gray-200));
+}
+
+[dir='rtl'] {
+    [x-on\:click*=".setTextAlign('start').run()"],
+    [x-on\:click*=".setTextAlign('end').run()"],
+    [x-on\:click*=".undo().run()"],
+    [x-on\:click*=".redo().run()"],
+    [x-on\:click*=".setTextAlign('justify').run()"] {
+        &.fi-fo-rich-editor-tool svg {
+            transform: rotateY(180deg);
+        }
+    }
 }
