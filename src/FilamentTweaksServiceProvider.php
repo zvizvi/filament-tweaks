@@ -35,6 +35,7 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
+                    ->publishAssets()
                     ->askToStarRepoOnGitHub('zvizvi/filament-tweaks');
             });
 

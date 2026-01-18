@@ -19,8 +19,9 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "filament/filament": "^4.0",
+        "marcelweidum/filament-expiration-notice": "^1.0.13",
         "spatie/laravel-package-tools": "^1.15.0"
     },
     "require-dev": {
