@@ -48,7 +48,7 @@ class FilamentTweaksPlugin implements Plugin
     public function boot(Panel $panel): void
     {
         $panel
-            ->brandName(env('APP_NAME'))
+            ->brandName($panel->getBrandName() ?? env('APP_NAME'))
             ->resourceCreatePageRedirect('view')
             ->resourceEditPageRedirect('view');
 
