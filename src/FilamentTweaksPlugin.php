@@ -32,6 +32,7 @@ use Filament\Tables\Columns\Column;
 use Filament\Tables\Filters\BaseFilter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Livewire\Livewire;
 
 class FilamentTweaksPlugin implements Plugin
 {
@@ -42,7 +43,19 @@ class FilamentTweaksPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        //
+        $editProfileClass = 'Joaopaulolndev\\FilamentEditProfile\\Livewire\\EditProfileForm';
+        $editPasswordClass = 'Joaopaulolndev\\FilamentEditProfile\\Livewire\\EditPasswordForm';
+        $browserSessionsClass = 'Joaopaulolndev\\FilamentEditProfile\\Livewire\\BrowserSessionsForm';
+
+        if (class_exists($editProfileClass)) {
+            Livewire::component('edit_profile_form', $editProfileClass);
+        }
+        if (class_exists($editPasswordClass)) {
+            Livewire::component('edit_password_form', $editPasswordClass);
+        }
+        if (class_exists($browserSessionsClass)) {
+            Livewire::component('browser_sessions_form', $browserSessionsClass);
+        }
     }
 
     public function boot(Panel $panel): void
