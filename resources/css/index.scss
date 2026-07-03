@@ -43,6 +43,11 @@ textarea.autogrow {
     }
 }
 
+.fi-main .fi-in-text-item:not(.fi-bulleted li.fi-in-text-item),
+.fi-ta-table .fi-ta-text-item:not(.fi-bulleted li.fi-ta-text-item) {
+    display: block;
+}
+
 /* RTL customizations */
 [dir='rtl'] body {
     .fi-input[type='tel'],
