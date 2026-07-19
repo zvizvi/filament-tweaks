@@ -68,6 +68,7 @@ Each feature is toggled by a key under `features` in `config/filament-tweaks.php
 | `non_native_select` | `true` | `Select` and `SelectFilter` use `native(false)`. |
 | `configure_datetime_picker` | `true` | `DateTimePicker` without seconds, week starting on Sunday. |
 | `configure_table_styling` | `true` | Tables are striped, columns reorderable, filters and column manager applied immediately, 25 rows per page. |
+| `show_pagination_overview_on_small_screens` | `true` | Keeps the pagination results overview ("Showing X to Y of Z results") visible on a centered row when the pagination bar is narrow. |
 | `enable_rich_editor_toolbar_buttons` | `true` | A fuller `RichEditor` toolbar (headings, alignment, sub/superscript, tables, code blocks, undo/redo). |
 | `customize_system_icons` | `false` | Swaps the sidebar collapse/expand icons for `heroicon-o-bars-3*` variants. |
 | `enable_all_columns_toggleable` | `true` | Registers the `allColumnsToggleable()` table macro. |
@@ -152,6 +153,8 @@ A stylesheet is registered automatically with the panel. It covers:
 - RTL fixes: LTR-aligned email/tel inputs and columns, a mirrored `nprogress` bar, button group borders, and flipped alignment/undo/redo icons in the rich editor.
 
 When the date range picker filter package is installed, a second stylesheet fixes its RTL layout (calendar direction, arrows, ranges panel and buttons).
+
+When `show_pagination_overview_on_small_screens` is enabled (the default), a small inline `<style>` block is injected into the panel head (via a `HEAD_END` render hook) that turns the pagination nav into a size container and re-shows the results overview on its own centered row once the bar drops below `56rem`.
 
 ## Testing
 

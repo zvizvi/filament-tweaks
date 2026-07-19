@@ -37,6 +37,9 @@ return [
         // Configure table styling (striped and 25 items per page)
         'configure_table_styling' => true,
 
+        // Show the total results overview on small screens
+        'show_pagination_overview_on_small_screens' => true,
+
         // Enable rich editor toolbar buttons
         'enable_rich_editor_toolbar_buttons' => true,
 

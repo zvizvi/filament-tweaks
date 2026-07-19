@@ -9,6 +9,8 @@ use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
+use Filament\Support\Facades\FilamentView;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
@@ -80,6 +82,31 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
 
         // Icon Registration
         FilamentIcon::register($this->getIcons());
+
+        // Show the total results overview on small screens
+        if (config('filament-tweaks.features.show_pagination_overview_on_small_screens', true)) {
+            FilamentView::registerRenderHook(
+                PanelsRenderHook::HEAD_END,
+                fn (): string => <<<'HTML'
+                    <style>
+                        @supports (container-type: inline-size) {
+                            nav.fi-pagination { container-type: inline-size; }
+
+                            @container (width < 56rem) {
+                                nav.fi-pagination .fi-pagination-overview {
+                                    display: block;
+                                    order: -1;
+                                    grid-column: 1 / -1;
+                                    margin-block-end: 10px;
+                                    font-size: 12px;
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    </style>
+                    HTML,
+            );
+        }
 
         // Handle Stubs
         if (app()->runningInConsole()) {
