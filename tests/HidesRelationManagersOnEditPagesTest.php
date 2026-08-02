@@ -6,9 +6,10 @@ use Dowhile\FilamentTweaks\Livewire\HidesRelationManagersOnEditPages;
 use Filament\Facades\Filament;
 use Filament\Panel;
 use Filament\Resources\Pages\EditRecord;
+use Livewire\Component;
 use Livewire\ComponentHookRegistry;
 
-function feature(bool | array $value): void
+function feature(bool|array $value): void
 {
     config()->set('filament-tweaks.features.hide_relation_managers_on_edit_pages', $value);
 }
@@ -53,7 +54,7 @@ it('is disabled by default', function () {
     expect(config('filament-tweaks.features.hide_relation_managers_on_edit_pages'))->toBeFalse();
 });
 
-it('registers the hook when the feature is enabled', function (bool | array $value) {
+it('registers the hook when the feature is enabled', function (bool|array $value) {
     feature($value);
 
     (new FilamentTweaksServiceProvider(app()))->packageBooted();
@@ -71,7 +72,7 @@ it('empties the relation managers of a plain edit page', function () {
     expect(cachedRelationManagers(bootHookOn(plainEditPage())))->toBe([]);
 });
 
-it('does nothing while the feature is disabled', function (bool | array $value) {
+it('does nothing while the feature is disabled', function (bool|array $value) {
     feature($value);
     currentPanel();
 
@@ -120,7 +121,7 @@ it('ignores components that are not edit pages', function () {
     feature(true);
 
     $hook = new HidesRelationManagersOnEditPages;
-    $hook->setComponent(new class extends Livewire\Component
+    $hook->setComponent(new class extends Component
     {
         public function render()
         {
