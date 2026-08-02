@@ -19,6 +19,9 @@ return [
         // Disable default readOnlyRelationManagersOnResourceViewPagesByDefault
         'disable_readonly_relation_managers' => true,
 
+        // Hide relation managers on edit pages (they stay on view pages)
+        'hide_relation_managers_on_edit_pages' => false,
+
         // Center form actions alignment
         'center_form_actions' => true,
 

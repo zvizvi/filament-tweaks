@@ -62,6 +62,7 @@ Each feature is toggled by a key under `features` in `config/filament-tweaks.php
 | --- | --- | --- |
 | `sidebar_collapsible_on_desktop` | `true` | Enables `sidebarCollapsibleOnDesktop()`. |
 | `disable_readonly_relation_managers` | `true` | Relation managers on view pages stay editable. |
+| `hide_relation_managers_on_edit_pages` | `false` | Edit pages show no relation managers, as if every page returned `[]` from `getRelationManagers()`. See [Relation managers on edit pages](#relation-managers-on-edit-pages). |
 | `center_form_actions` | `true` | Centers form actions and modal footer actions. |
 | `disable_create_another` | `true` | Removes "create another" from `CreateRecord`, `CreateAction`, `AttachAction` and `AssociateAction`. |
 | `translate_labels` | `true` | Calls `translateLabel()` on actions, columns, fields, entries, filters, sections, tabs, steps and groups; also runs section and empty-state headings through `__()`. |
@@ -91,6 +92,50 @@ Uncomment any of these to set panel-wide display defaults. Each one is skipped w
 ```
 
 `date`, `time`, `datetime` and `currency` are applied to both `Table` and `Schema` defaults; `timezone` is passed to `FilamentTimezone::set()`.
+
+## Relation managers on edit pages
+
+This one is off by default — it changes what existing pages render, so you opt in:
+
+```php
+// config/filament-tweaks.php
+'features' => [
+    'hide_relation_managers_on_edit_pages' => true,
+],
+```
+
+Once enabled, every `EditRecord` page behaves as if it declared:
+
+```php
+public function getRelationManagers(): array
+{
+    return [];
+}
+```
+
+Relation managers keep showing up on view pages and on `ManageRelatedRecords` pages — only edit pages are emptied. It is implemented as a Livewire component hook, so no page or resource needs to be touched.
+
+A page opts out in either of two ways:
+
+```php
+use Dowhile\FilamentTweaks\Contracts\ShowsRelationManagers;
+
+// Filament's default behaviour, i.e. everything from the resource's getRelations().
+class EditOrder extends EditRecord implements ShowsRelationManagers {}
+```
+
+```php
+// Or declare the method yourself — anything you declare wins, including a subset.
+class EditOrder extends EditRecord
+{
+    public function getRelationManagers(): array
+    {
+        return [OrderItemsRelationManager::class];
+    }
+}
+```
+
+The opt-out is detected per page class: declaring `getRelationManagers()` on the page (or on your own base edit page class) is enough to be left alone.
 
 ## Macros
 

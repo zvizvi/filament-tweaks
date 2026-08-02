@@ -3,6 +3,7 @@
 namespace Dowhile\FilamentTweaks;
 
 use Dowhile\FilamentTweaks\Commands\FilamentTweaksCommand;
+use Dowhile\FilamentTweaks\Livewire\HidesRelationManagersOnEditPages;
 use Dowhile\FilamentTweaks\Testing\TestsFilamentTweaks;
 use Filament\Facades\Filament;
 use Filament\Support\Assets\Asset;
@@ -106,6 +107,11 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
                     </style>
                     HTML,
             );
+        }
+
+        // Hide relation managers on edit pages by default
+        if (config('filament-tweaks.features.hide_relation_managers_on_edit_pages', false)) {
+            app('livewire')->componentHook(new HidesRelationManagersOnEditPages);
         }
 
         // Handle Stubs
