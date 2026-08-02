@@ -3,6 +3,7 @@
 namespace Dowhile\FilamentTweaks\Livewire;
 
 use Dowhile\FilamentTweaks\Contracts\ShowsRelationManagers;
+use Filament\Facades\Filament;
 use Filament\Resources\Pages\EditRecord;
 use Livewire\ComponentHook;
 use ReflectionMethod;
@@ -18,6 +19,9 @@ use ReflectionMethod;
  *
  * Pages that declare their own `getRelationManagers()`, or implement
  * `ShowsRelationManagers`, are left untouched.
+ *
+ * Only applies to the panel handling the current request, and only when that
+ * panel opted in — either through the plugin or through the config default.
  */
 class HidesRelationManagersOnEditPages extends ComponentHook
 {
@@ -33,6 +37,10 @@ class HidesRelationManagersOnEditPages extends ComponentHook
             return;
         }
 
+        if (! static::isEnabledForCurrentPanel()) {
+            return;
+        }
+
         if (static::declaresOwnRelationManagers($page)) {
             return;
         }
@@ -42,6 +50,20 @@ class HidesRelationManagersOnEditPages extends ComponentHook
         (function (): void {
             $this->cachedRelationManagers = [];
         })->call($page);
+    }
+
+    /**
+     * `true` covers every panel, an array limits it to the listed panel IDs.
+     */
+    protected static function isEnabledForCurrentPanel(): bool
+    {
+        $feature = config('filament-tweaks.features.hide_relation_managers_on_edit_pages', false);
+
+        if (is_array($feature)) {
+            return in_array(Filament::getCurrentPanel()?->getId(), $feature, strict: true);
+        }
+
+        return (bool) $feature;
     }
 
     protected static function declaresOwnRelationManagers(EditRecord $page): bool

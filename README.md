@@ -62,7 +62,7 @@ Each feature is toggled by a key under `features` in `config/filament-tweaks.php
 | --- | --- | --- |
 | `sidebar_collapsible_on_desktop` | `true` | Enables `sidebarCollapsibleOnDesktop()`. |
 | `disable_readonly_relation_managers` | `true` | Relation managers on view pages stay editable. |
-| `hide_relation_managers_on_edit_pages` | `false` | Edit pages show no relation managers, as if every page returned `[]` from `getRelationManagers()`. See [Relation managers on edit pages](#relation-managers-on-edit-pages). |
+| `hide_relation_managers_on_edit_pages` | `false` | Edit pages show no relation managers, as if every page returned `[]` from `getRelationManagers()`. Accepts `true` or a list of panel IDs. See [Relation managers on edit pages](#relation-managers-on-edit-pages). |
 | `center_form_actions` | `true` | Centers form actions and modal footer actions. |
 | `disable_create_another` | `true` | Removes "create another" from `CreateRecord`, `CreateAction`, `AttachAction` and `AssociateAction`. |
 | `translate_labels` | `true` | Calls `translateLabel()` on actions, columns, fields, entries, filters, sections, tabs, steps and groups; also runs section and empty-state headings through `__()`. |
@@ -100,11 +100,12 @@ This one is off by default — it changes what existing pages render, so you opt
 ```php
 // config/filament-tweaks.php
 'features' => [
-    'hide_relation_managers_on_edit_pages' => true,
+    'hide_relation_managers_on_edit_pages' => true,        // every panel
+    'hide_relation_managers_on_edit_pages' => ['admin'],   // …or only these panel IDs
 ],
 ```
 
-Once enabled, every `EditRecord` page behaves as if it declared:
+Once enabled, every `EditRecord` page of those panels behaves as if it declared:
 
 ```php
 public function getRelationManagers(): array

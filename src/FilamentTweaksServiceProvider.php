@@ -109,8 +109,10 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
             );
         }
 
-        // Hide relation managers on edit pages by default
-        if (config('filament-tweaks.features.hide_relation_managers_on_edit_pages', false)) {
+        // Hide relation managers on edit pages
+        $hideRelationManagers = config('filament-tweaks.features.hide_relation_managers_on_edit_pages', false);
+
+        if ($hideRelationManagers === true || (is_array($hideRelationManagers) && filled($hideRelationManagers))) {
             app('livewire')->componentHook(new HidesRelationManagersOnEditPages);
         }
 
