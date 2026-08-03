@@ -144,12 +144,6 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
             Css::make('filament-tweaks-styles', __DIR__.'/../resources/dist/filament-tweaks.css'),
         ];
 
-        $dateRangeFilterClass = 'Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter';
-
-        if (config('filament-tweaks.features.configure_date_range_picker', true) && class_exists($dateRangeFilterClass)) {
-            $assets[] = Css::make('dowhile-filament-tweaks-daterangepicker-styles', __DIR__.'/../resources/css/date-range-picker.css');
-        }
-
         return $assets;
     }
 

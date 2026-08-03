@@ -75,7 +75,7 @@ Each feature is toggled by a key under `features` in `config/filament-tweaks.php
 | `enable_all_columns_toggleable` | `true` | Registers the `allColumnsToggleable()` table macro. |
 | `enable_currency_mask` | `true` | Registers the `currencyMask()` text input macro. |
 | `enable_autogrow_textarea` | `true` | Registers the `autogrow()` textarea macro. |
-| `configure_date_range_picker` | `true` | Configures [malzariey/filament-daterangepicker-filter](https://github.com/malzariey/filament-daterangepicker-filter) when installed, and loads its RTL stylesheet. |
+| `configure_date_range_picker` | `true` | Configures [malzariey/filament-daterangepicker-filter](https://github.com/malzariey/filament-daterangepicker-filter) when installed. |
 
 ## Formats
 
