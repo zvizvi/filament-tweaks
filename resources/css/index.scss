@@ -23,6 +23,10 @@ textarea.autogrow {
     min-height: 60px;
 }
 
+.fi-ta-actions:not(:has(> :not(.hidden):not([hidden]))) {
+    display: none;
+}
+
 /* Hide dropdown icon and hover effects for single-tenant menu */
 .fi-tenant-menu:not(:has(.fi-dropdown-panel)) {
     .fi-tenant-menu-trigger:hover,
