@@ -61,7 +61,13 @@ class FilamentTweaksServiceProvider extends PackageServiceProvider
         }
     }
 
-    public function packageRegistered(): void {}
+    public function packageRegistered(): void
+    {
+        // Macros live on the component classes, not on a panel, so they are registered
+        // here: waiting for a panel to boot would leave them undefined everywhere a
+        // panel request is not involved (tests, console commands, queued jobs).
+        Macros::register();
+    }
 
     public function packageBooted(): void
     {

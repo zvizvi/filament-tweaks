@@ -12,8 +12,6 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\Entry;
 use Filament\Pages\BasePage;
 use Filament\Panel;
@@ -27,7 +25,6 @@ use Filament\Schemas\Schema;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Facades\FilamentIcon;
 use Filament\Support\Facades\FilamentTimezone;
-use Filament\Support\RawJs;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Filters\BaseFilter;
 use Filament\Tables\Filters\SelectFilter;
@@ -208,50 +205,10 @@ class FilamentTweaksPlugin implements Plugin
             ]);
         }
 
-        // Make all columns toggleable
-        if (config('filament-tweaks.features.enable_all_columns_toggleable', true)) {
-            Table::macro('allColumnsToggleable', function () {
-                /** @var Table $this */
-                $columns = $this->getColumns();
-                foreach ($columns as $column) {
-                    /** @var Column $column */
-                    $column->toggleable(isToggledHiddenByDefault: $column->isToggledHiddenByDefault());
-                }
-
-                $this->columnManagerMaxHeight($this->getColumnManagerMaxHeight() ?? '500px');
-
-                return $this;
-            });
-        }
-
-        // Currency mask for text inputs
-        if (config('filament-tweaks.features.enable_currency_mask', true)) {
-            TextInput::macro('currencyMask', function (): TextInput {
-                /**
-                 * @var TextInput $this
-                 */
-                return $this->numeric()
-                    ->mask(RawJs::make('$money($input)'))
-                    ->stripCharacters(',')
-                    ->extraInputAttributes([
-                        'maxlength' => '12',
-                    ]);
-            });
-        }
-
-        if (config('filament-tweaks.features.enable_autogrow_textarea', true)) {
-            Textarea::macro('autogrow', function ($maxHeight = null): Textarea {
-                /**
-                 * @var Textarea $this
-                 */
-                $attributes = ['class' => 'autogrow'];
-                if ($maxHeight) {
-                    $attributes['style'] = 'max-height:'.$maxHeight;
-                }
-
-                return $this->extraInputAttributes($attributes);
-            });
-        }
+        // Macros are registered by the service provider, so they exist without a booted
+        // panel. Repeating the (idempotent) call keeps them available for an app that
+        // opted the provider out of package discovery and only registers this plugin.
+        Macros::register();
 
         // Configure plugins
 

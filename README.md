@@ -152,6 +152,12 @@ TextInput::make('price')->currencyMask();
 Textarea::make('notes')->autogrow('20rem');
 ```
 
+The macros are registered by the package's service provider, not by the plugin, because they
+live on the component classes rather than on a panel. A plugin only boots on a request that
+goes through a panel, so registering them there would leave them undefined in tests, console
+commands and queued jobs — the macro would exist or not depending on whether something had
+already hit a panel route in that process.
+
 ## Filters
 
 ```php
