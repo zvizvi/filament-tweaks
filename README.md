@@ -156,6 +156,13 @@ TextInput::make('price')->currencyMask();
 Textarea::make('notes')->autogrow('20rem');
 ```
 
+### IDE completion
+
+Macros are registered at runtime, so editors cannot see them on their own. The package
+ships an `ide.php` stub file that declares them; VS Code (Intelephense) and PhpStorm index
+`vendor/` automatically, so completion for the macros works with no setup. The file is never
+autoloaded and every declaration in it sits behind `if (false)`, so PHP never executes it.
+
 The macros are registered by the package's service provider, not by the plugin, because they
 live on the component classes rather than on a panel. A plugin only boots on a request that
 goes through a panel, so registering them there would leave them undefined in tests, console
