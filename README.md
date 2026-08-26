@@ -145,6 +145,10 @@ The opt-out is detected per page class: declaring `getRelationManagers()` on the
 // Also caps the column manager height at 500px unless you set your own.
 $table->columns([...])->allColumnsToggleable();
 
+// Pass a condition (bool or closure) to apply it only sometimes; when it is
+// false the table is left exactly as it was.
+$table->columns([...])->allColumnsToggleable(auth()->user()->isAdmin());
+
 // Numeric input with a thousands-separator money mask, capped at 12 characters.
 TextInput::make('price')->currencyMask();
 

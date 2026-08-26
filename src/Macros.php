@@ -2,6 +2,7 @@
 
 namespace Dowhile\FilamentTweaks;
 
+use Closure;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Support\RawJs;
@@ -39,8 +40,12 @@ class Macros
             return;
         }
 
-        Table::macro('allColumnsToggleable', function () {
+        Table::macro('allColumnsToggleable', function (bool | Closure $condition = true) {
             /** @var Table $this */
+            if (! $this->evaluate($condition)) {
+                return $this;
+            }
+
             $columns = $this->getColumns();
             foreach ($columns as $column) {
                 /** @var Column $column */

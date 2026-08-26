@@ -70,6 +70,17 @@ it('makes every column toggleable, keeping its own default visibility', function
         ->and($table->getColumnManagerMaxHeight())->toBe('500px');
 });
 
+it('leaves the table untouched when the condition is false', function ($condition) {
+    $table = tableWithColumns([TextColumn::make('name')])
+        ->allColumnsToggleable($condition);
+
+    expect($table->getColumns()['name']->isToggleable())->toBeFalse()
+        ->and($table->getColumnManagerMaxHeight())->toBeNull();
+})->with([
+    'boolean' => false,
+    'closure' => fn () => fn () => false,
+]);
+
 it('keeps a column manager height that was already set', function () {
     $table = tableWithColumns([TextColumn::make('name')])
         ->columnManagerMaxHeight('20rem')
