@@ -21,7 +21,7 @@ namespace Filament\Tables {
              *
              * Pass a falsy condition to leave the table exactly as it was.
              */
-            public function allColumnsToggleable(bool | \Closure $condition = true): static {}
+            public function allColumnsToggleable(bool|\Closure $condition = true): static {}
         }
     }
 }
