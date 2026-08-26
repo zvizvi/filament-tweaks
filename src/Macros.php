@@ -40,7 +40,7 @@ class Macros
             return;
         }
 
-        Table::macro('allColumnsToggleable', function (bool | Closure $condition = true) {
+        Table::macro('allColumnsToggleable', function (bool|Closure $condition = true) {
             /** @var Table $this */
             if (! $this->evaluate($condition)) {
                 return $this;
