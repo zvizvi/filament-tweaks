@@ -4,6 +4,8 @@ use Dowhile\FilamentTweaks\FilamentTweaksServiceProvider;
 use Dowhile\FilamentTweaks\Macros;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Support\Components\ComponentManager;
+use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
@@ -18,6 +20,20 @@ function flushTweakMacros(): void
 function tableWithColumns(array $columns): Table
 {
     return Table::make(Mockery::mock(HasTable::class))->columns($columns);
+}
+
+/**
+ * A table built the way Filament builds one: made FIRST - which is when
+ * Table::configureUsing() callbacks run - and given its columns afterwards, so
+ * the columns are constructed after any default the macro registered.
+ *
+ * @param  Closure(): array<mixed>  $columns
+ */
+function tableBuiltInOrder(Closure $columns): Table
+{
+    $table = Table::make(Mockery::mock(HasTable::class));
+
+    return $table->columns($columns());
 }
 
 // Macros are static state on the component classes and survive between tests, so they are
@@ -87,4 +103,45 @@ it('keeps a column manager height that was already set', function () {
         ->allColumnsToggleable();
 
     expect($table->getColumnManagerMaxHeight())->toBe('20rem');
+});
+
+it('turns every column toggleable when it is used as a table default', function () {
+    Table::configureUsing(fn (Table $table) => $table->allColumnsToggleable());
+
+    $table = tableBuiltInOrder(fn () => [
+        TextColumn::make('name'),
+        TextColumn::make('notes')->toggleable(isToggledHiddenByDefault: true),
+        TextColumn::make('id')->toggleable(false),
+    ]);
+
+    $columns = $table->getColumns();
+
+    expect($columns['name']->isToggleable())->toBeTrue()
+        ->and($columns['name']->isToggledHiddenByDefault())->toBeFalse()
+        ->and($columns['notes']->isToggleable())->toBeTrue()
+        ->and($columns['notes']->isToggledHiddenByDefault())->toBeTrue()
+        ->and($columns['id']->isToggleable())->toBeFalse()
+        ->and($table->getColumnManagerMaxHeight())->toBe('500px');
+});
+
+it('registers the column default once, however many tables are built', function () {
+    Table::configureUsing(fn (Table $table) => $table->allColumnsToggleable());
+
+    tableBuiltInOrder(fn () => [TextColumn::make('name')]);
+    tableBuiltInOrder(fn () => [TextColumn::make('name')]);
+
+    $manager = ComponentManager::resolve();
+
+    $registered = (new ReflectionProperty($manager, 'configurations'))
+        ->getValue($manager)[Column::class] ?? [];
+
+    expect($registered)->toHaveCount(1);
+});
+
+it('registers no column default when the condition is false', function () {
+    Table::configureUsing(fn (Table $table) => $table->allColumnsToggleable(false));
+
+    $table = tableBuiltInOrder(fn () => [TextColumn::make('name')]);
+
+    expect($table->getColumns()['name']->isToggleable())->toBeFalse();
 });

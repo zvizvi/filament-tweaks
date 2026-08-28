@@ -20,6 +20,10 @@ namespace Filament\Tables {
              * and cap the column manager height at 500px unless one is already set.
              *
              * Pass a falsy condition to leave the table exactly as it was.
+             *
+             * Called from Table::configureUsing(), where no column exists yet, it
+             * switches the default on at the column level instead, for every table
+             * built afterwards in the request.
              */
             public function allColumnsToggleable(bool|\Closure $condition = true): static {}
         }

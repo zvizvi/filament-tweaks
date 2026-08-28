@@ -149,12 +149,28 @@ $table->columns([...])->allColumnsToggleable();
 // false the table is left exactly as it was.
 $table->columns([...])->allColumnsToggleable(auth()->user()->isAdmin());
 
+// Panel-wide, from a service provider. Filament runs configureUsing() callbacks
+// inside Table::make(), so the macro is reached before ->columns([...]) has been
+// chained on - there is nothing to mutate yet, so it switches the default on one
+// level down instead, at the column level, for every table built afterwards.
+Table::configureUsing(fn (Table $table) => $table->allColumnsToggleable());
+
 // Numeric input with a thousands-separator money mask, capped at 12 characters.
 TextInput::make('price')->currencyMask();
 
 // Textarea that grows with its content (via CSS `field-sizing`), with an optional max height.
 Textarea::make('notes')->autogrow('20rem');
 ```
+
+A column keeps the last word wherever `allColumnsToggleable()` is called from: one
+that declares `->toggleable(isToggledHiddenByDefault: true)` still starts hidden, and
+one that declares `->toggleable(false)` stays out of the column manager. A hidden
+column — including one whose `->visible()` is decided per record — is never toggleable,
+which is Filament's own rule.
+
+Used panel-wide, a condition is still evaluated per table, but the default it switches
+on covers every table built after it in the same request. Call the macro after
+`->columns([...])` when the condition has to be answered per table.
 
 ### IDE completion
 
