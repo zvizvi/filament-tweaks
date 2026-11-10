@@ -114,11 +114,13 @@ class FilamentTweaksPlugin implements Plugin
             ];
             foreach ($components as $component) {
                 $component::configureUsing(function ($c): void {
-                    if ($c->getHeading()) {
-                        $heading = $c->getHeading();
-                        if ($heading && is_string($heading)) {
-                            $c->heading(__($heading));
-                        }
+                    // Read the raw heading instead of calling getHeading(): configureUsing() runs inside
+                    // make(), before the component has a container, so evaluating a closure heading that
+                    // injects $record, $get, etc. would fail - and a dynamic heading would be frozen.
+                    $heading = (fn () => $this->heading ?? null)->call($c);
+
+                    if (is_string($heading) && filled($heading)) {
+                        $c->heading(__($heading));
                     }
                 });
             }
