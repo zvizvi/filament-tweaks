@@ -184,6 +184,11 @@ class FilamentTweaksPlugin implements Plugin
             });
         }
 
+        // Show a loading skeleton while table records load (only on Filament versions that support it)
+        if (config('filament-tweaks.features.table_loading_skeleton', true) && method_exists(Table::class, 'loadingSkeleton')) {
+            Table::configureUsing(fn (Table $table) => $table->loadingSkeleton());
+        }
+
         if (config('filament-tweaks.features.enable_rich_editor_toolbar_buttons', true)) {
             RichEditor::configureUsing(function (RichEditor $editor) {
                 $editor->toolbarButtons([

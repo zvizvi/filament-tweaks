@@ -69,6 +69,7 @@ Each feature is toggled by a key under `features` in `config/filament-tweaks.php
 | `non_native_select` | `true` | `Select` and `SelectFilter` use `native(false)`. |
 | `configure_datetime_picker` | `true` | `DateTimePicker` without seconds, week starting on Sunday. |
 | `configure_table_styling` | `true` | Tables are striped, columns reorderable, filters and column manager applied immediately, 25 rows per page. |
+| `table_loading_skeleton` | `true` | Tables show a loading skeleton while records load (`loadingSkeleton()`). Skipped on Filament versions without that method. |
 | `show_pagination_overview_on_small_screens` | `true` | Keeps the pagination results overview ("Showing X to Y of Z results") visible on a centered row when the pagination bar is narrow. |
 | `enable_rich_editor_toolbar_buttons` | `true` | A fuller `RichEditor` toolbar (headings, alignment, sub/superscript, tables, code blocks, undo/redo). |
 | `customize_system_icons` | `false` | Swaps the sidebar collapse/expand icons for `heroicon-o-bars-3*` variants. |
